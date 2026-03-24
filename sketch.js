@@ -65,6 +65,13 @@ const MAP_START_Y = VIEWH - TILE_H * 4;
 // gravity
 const GRAVITY = 10;
 
+// --- DEBUG / GRAVITY ---
+let debugMode = true;
+let moonGravity = false;
+
+const EARTH_GRAVITY = 10;
+const MOON_GRAVITY = 1.6;
+
 function preload() {
   // --- IMAGES ---
   playerImg = loadImage("assets/foxSpriteSheet.png");
@@ -86,7 +93,7 @@ function setup() {
   // needed to correct an visual artifacts from attempted antialiasing
   allSprites.pixelPerfect = true;
 
-  world.gravity.y = GRAVITY;
+world.gravity.y = EARTH_GRAVITY;
 
   // Try to start background music immediately.
   if (musicSfx) musicSfx.setLoop(true);
@@ -154,6 +161,17 @@ function startMusicIfNeeded() {
 
 function keyPressed() {
   startMusicIfNeeded();
+
+  // Toggle moon gravity with G key
+  if (key === "g" || key === "G") {
+    moonGravity = !moonGravity;
+    world.gravity.y = moonGravity ? MOON_GRAVITY : EARTH_GRAVITY;
+  }
+
+  // Toggle debug screen with `
+  if (key === "`") {
+    debugMode = !debugMode;
+  }
 }
 
 function mousePressed() {
@@ -221,4 +239,18 @@ function draw() {
 
   // --- KEEP IN VIEW ---
   player.pos.x = constrain(player.pos.x, FRAME_W / 2, VIEWW - FRAME_W / 2);
+
+  // --- DEBUG SCREEN ---
+if (debugMode) {
+  camera.off();
+  fill(0, 150);
+  rect(5, 5, 140, 60);
+
+  fill(255);
+  textSize(10);
+  text("DEBUG MENU", 10, 20);
+  text("Press G: Moon Gravity", 10, 35);
+  text("Gravity: " + (moonGravity ? "MOON" : "EARTH"), 10, 50);
+  camera.on();
+}
 }
