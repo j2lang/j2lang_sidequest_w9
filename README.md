@@ -12,32 +12,45 @@ Joanne Lang j2lang 21066111
 
 ## Description
 
-Generates a level using JSON data; uses loops to dynamically place obstacles/platforms. Second level loads automatically when the first is finished.
+This project is a 2D platformer where the player controls a fox character that can move, jump, and attack. The game uses sprite animations, sound effects, background music, and tile-based platforms with gravity and collision. A debug menu was added to toggle moon gravity and respawn the player for testing. The game was inspired by classic side-scrolling platformer games.
 
 ---
 
 ## Interaction Instructions
 
-Land on green to advance • Move: A/D or ←/→ • Jump: Space/W/↑ • Next: N
+Controls:
+
+A / Left Arrow → Move left
+D / Right Arrow → Move right
+W / Up Arrow → Jump
+Space → Attack
+R → Respawn player
+G → Toggle Moon gravity (debug)
+` → Toggle debug menu
+
+Background music starts after a key press or mouse click. The debug menu displays gravity mode and player position for testing.
 
 ---
 
 ## Assets
 
-N/A
+> - `assets/foxSpriteSheet.png`
+> - `assets/combinedBackground.png`
+> - `assets/groundTile.png`
+> - `assets/groundTileDeep.png`
+> - `assets/sfx/jump.wav`
+> - `assets/sfx/music.wav`
 
 ---
 
 ## GenAI
 
-I inputted the .js files and side quest instructions, and ChatGPT gave me explanations of the concepts and .js solutions to try for what I wanted to implement.
-•	Gave it more input – copy pasted in the starting Example 5 files to provide more context after having asked it to explain the side quest instructions; this was to give it more context so it could give a better, more specific response to my initial prompt asking it to explain the instructions
-•	Still didn’t fully understand its explanation, so prompted it to further clarify what the difference was between the arrays approach/JSON approach
-•	Tried implementing a given JSON approach, but the blob couldn’t physically jump high enough to reach the next platform; prompted it for ways to fix this
-•	Prompted for a way to make gap between platforms big enough for the blob to get stuck but not fall through; the result was technically wrong (gave solution for gap slightly bigger than blob width instead of slightly smaller, but I liked this so I kept it)
-•	When adding “win” platforms, prompted it for exactly where in blobPlayer.js I would need to add the given code snippet
-•	Prompted it to fix the mistake in my code by giving it all my updated files (Live Server screen was just blank white, needed to fix this)
-•	Prompted it to fix the level transition glitch
+•	I uploaded my game files (index.html, sketch.js, style.css, etc.) and asked ChatGPT how to add a debug screen to my game.
+•	ChatGPT suggested code for a debug menu and explained where to place it in the draw() function.
+•	I asked how to add a moon gravity toggle, and ChatGPT provided code to switch between Earth and Moon gravity using a key press.
+•	I implemented a respawn feature and then asked ChatGPT how to display the respawn control in the debug menu.
+•	ChatGPT helped update the debug overlay text to include the new controls and debugging information.
+•	I used ChatGPT to help write the README description, interaction instructions, and this GenAI summary.
 
 ---
 

@@ -172,6 +172,11 @@ function keyPressed() {
   if (key === "`") {
     debugMode = !debugMode;
   }
+
+  // Reset key
+  if (key === "r" || key === "R") {
+    respawnPlayer();
+  }
 }
 
 function mousePressed() {
@@ -181,6 +186,13 @@ function mousePressed() {
 function touchStarted() {
   startMusicIfNeeded();
   return false;
+}
+
+function respawnPlayer() {
+  player.pos.x = FRAME_W;
+  player.pos.y = MAP_START_Y;
+  player.vel.x = 0;
+  player.vel.y = 0;
 }
 
 function draw() {
@@ -244,13 +256,20 @@ function draw() {
 if (debugMode) {
   camera.off();
   fill(0, 150);
-  rect(5, 5, 140, 60);
+  rect(5, 5, 160, 85);
 
   fill(255);
   textSize(10);
   text("DEBUG MENU", 10, 20);
-  text("Press G: Moon Gravity", 10, 35);
-  text("Gravity: " + (moonGravity ? "MOON" : "EARTH"), 10, 50);
+  text("G: Toggle Moon Gravity", 10, 35);
+  text("R: Respawn Player", 10, 50);
+  text("`: Toggle Debug Menu", 10, 65);
+  text("Gravity: " + (moonGravity ? "MOON" : "EARTH"), 10, 80);
   camera.on();
+}
+
+// Respawn if player falls off map
+if (player.y > VIEWH + 50) {
+  respawnPlayer();
 }
 }
